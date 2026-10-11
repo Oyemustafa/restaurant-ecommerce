@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Urban Bites</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container nav">
+        <div class="brand">
+          <span class="brand-mark">UB</span>
+          <span>Urban Bites</span>
+        </div>
+        <nav>
+          <a href="#menu">Menu</a>
+          <a href="#offers">Offers</a>
+          <a href="#about">About</a>
+        </nav>
+        <button class="nav-button">Order Now</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <p class="eyebrow">Fresh. Fast. Flavorful.</p>
+            <h1>Restaurant food you can order in minutes.</h1>
+            <p>
+              Enjoy chef-crafted meals, premium ingredients, and fast delivery from your favorite local kitchen.
+            </p>
+            <div class="hero-actions">
+              <a href="#menu" class="primary-btn">Browse menu</a>
+              <a href="#offers" class="secondary-btn">View deals</a>
+            </div>
+            <div class="meta-row">
+              <div><strong>4.9/5</strong><span>Customer rating</span></div>
+              <div><strong>15 min</strong><span>Average delivery</span></div>
+              <div><strong>1200+</strong><span>Meals served</span></div>
+            </div>
+          </div>
+          <div class="hero-card">
+            <div class="card-image">🍔</div>
+            <div class="dish-card">
+              <span class="tag">Top pick</span>
+              <h3>Fire Grilled Burger</h3>
+              <p>Beef patty, cheddar, lettuce, tomato</p>
+              <div class="card-row">
+                <strong>$18.50</strong>
+                <button>Add to cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="offers" class="offers">
+        <div class="container offer-grid">
+          <div class="offer-box">
+            <span>🔥</span>
+            <h3>Lunch Combo</h3>
+            <p>Save 20% on burger + drink</p>
+          </div>
+          <div class="offer-box">
+            <span>🎉</span>
+            <h3>Family Feast</h3>
+            <p>Two pizzas and a dessert set</p>
+          </div>
+          <div class="offer-box">
+            <span>🚚</span>
+            <h3>Free Delivery</h3>
+            <p>Orders above $35</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="menu" class="menu-section">
+        <div class="container section-heading">
+          <div>
+            <p class="eyebrow">Our Menu</p>
+            <h2>Popular dishes</h2>
+          </div>
+          <div class="filter-area">
+            <button class="chip active">All</button>
+            <button class="chip">Burgers</button>
+            <button class="chip">Pizza</button>
+            <button class="chip">Pasta</button>
+            <button class="chip">Desserts</button>
+          </div>
+        </div>
+
+        <div class="container menu-layout">
+          <div id="menu-items" class="menu-grid"></div>
+
+          <aside class="cart-panel">
+            <div class="cart-header">
+              <h3>Your order</h3>
+              <span id="cart-count">0 items</span>
+            </div>
+
+            <div id="cart-items" class="cart-items">
+              <p class="empty-cart">Your cart is empty.</p>
+            </div>
+
+            <div class="totals">
+              <div><span>Subtotal</span><strong id="subtotal">$0.00</strong></div>
+              <div><span>Delivery</span><strong id="delivery">$0.00</strong></div>
+              <div><span>Tax</span><strong id="tax">$0.00</strong></div>
+              <div class="total-row"><span>Total</span><strong id="total">$0.00</strong></div>
+            </div>
+
+            <form id="checkout-form" class="checkout-form">
+              <input type="text" id="customer-name" placeholder="Full name" required />
+              <input type="email" id="customer-email" placeholder="Email" required />
+              <textarea id="customer-address" placeholder="Delivery address" rows="3" required></textarea>
+              <button type="submit" class="checkout-btn">Place Order</button>
+            </form>
+          </aside>
+        </div>
+      </section>
+
+      <section id="about" class="about-section">
+        <div class="container about-box">
+          <div>
+            <p class="eyebrow">Why choose us</p>
+            <h2>Big flavor, every single bite.</h2>
+          </div>
+          <div class="about-copy">
+            <p>
+              We focus on handcrafted food, premium ingredients, and a warm dining experience that feels both exciting and comforting.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© 2026 Urban Bites</p>
+        <p>Open daily • 9:00 AM - 11:00 PM</p>
+      </div>
+    </footer>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
