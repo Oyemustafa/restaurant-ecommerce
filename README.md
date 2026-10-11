@@ -6,13 +6,29 @@ const deliveryEl = document.getElementById('delivery');
 const taxEl = document.getElementById('tax');
 const totalEl = document.getElementById('total');
 const checkoutForm = document.getElementById('checkout-form');
+const filterButtons = document.querySelectorAll('.chip');
 
 const state = {
   menu: [],
-  cart: []
+  cart: JSON.parse(localStorage.getItem('urban-bites-cart') || '[]'),
+  orders: JSON.parse(localStorage.getItem('urban-bites-orders') || '[]'),
+  activeFilter: 'All'
 };
 
 const formatCurrency = (value) => `$${Number(value).toFixed(2)}`;
+
+const saveCart = () => {
+  localStorage.setItem('urban-bites-cart', JSON.stringify(state.cart));
+};
+
+const saveOrders = () => {
+  localStorage.setItem('urban-bites-orders', JSON.stringify(state.orders));
+};
+
+const getFilteredMenu = () => {
+  if (state.activeFilter === 'All') return state.menu;
+  return state.menu.filter((item) => item.category === state.activeFilter);
+};
 
 const getCartSummary = () => {
   const subtotal = state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -24,11 +40,13 @@ const getCartSummary = () => {
 };
 
 const renderMenu = () => {
-  menuGrid.innerHTML = state.menu
+  const filteredMenu = getFilteredMenu();
+
+  menuGrid.innerHTML = filteredMenu
     .map(
       (item) => `
         <article class="menu-card">
-          <div class="menu-card-visual">${item.tag === 'Best Seller' ? '🍔' : item.category === 'Pasta' ? '🍝' : item.category === 'Pizza' ? '🍕' : item.category === 'Salads' ? '🥗' : item.category === 'Desserts' ? '🍰' : item.category === 'Wraps' ? '🌯' : item.category === 'Drinks' ? '🥤' : '🍽️'}</div>
+          <div class="menu-card-visual">${item.tag === 'Best Seller' ? '🍔' : item.category === 'Pasta' ? '🍝' : item.category === 'Pizza' ? '🍕' : item.category === 'Salads' ? '🥗' : item.category === 'Desserts' ? '🍰' : item.category === 'Wraps' ? '🌯' : item.category === 'Drinks' ? '🥤' : item.category === 'Curries' ? '🍛' : item.category === 'Seafood' ? '🐟' : '🍽️'}</div>
           <div class="menu-card-body">
             <div class="menu-card-header">
               <h3>${item.name}</h3>
@@ -99,6 +117,7 @@ const addToCart = (itemId) => {
     state.cart.push({ ...menuItem, quantity: 1 });
   }
 
+  saveCart();
   renderCart();
 };
 
@@ -115,7 +134,19 @@ const modifyQuantity = (itemId, action) => {
     }
   }
 
+  saveCart();
   renderCart();
+};
+
+const bindFilterButtons = () => {
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      state.activeFilter = button.textContent.trim();
+
+      filterButtons.forEach((chip) => chip.classList.toggle('active', chip === button));
+      renderMenu();
+    });
+  });
 };
 
 const fetchMenu = async () => {
@@ -159,8 +190,12 @@ checkoutForm.addEventListener('submit', async (event) => {
       throw new Error(result.message || 'Checkout failed');
     }
 
-    alert(`${result.message} Order ID: ${result.order.id}`);
+    state.orders.push(result.order);
+    saveOrders();
+
+    alert(`${result.message}\n\nOrder ID: ${result.order.id}\nTotal: ${formatCurrency(result.order.total)}`);
     state.cart = [];
+    saveCart();
     checkoutForm.reset();
     renderCart();
   } catch (error) {
@@ -168,4 +203,5 @@ checkoutForm.addEventListener('submit', async (event) => {
   }
 });
 
+bindFilterButtons();
 fetchMenu();
