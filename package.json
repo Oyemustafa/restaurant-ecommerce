@@ -1,0 +1,21 @@
+{
+  "name": "restaurant-ecommerce",
+  "version": "1.0.0",
+  "description": "Restaurant-style e-commerce app with menu, cart, and checkout flow",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "restaurant",
+    "ecommerce",
+    "express",
+    "node"
+  ],
+  "author": "Oyemustafa",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
